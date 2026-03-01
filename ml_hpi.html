@@ -1,0 +1,1912 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Language Bindings" href="language_bindings.html"><link rel="prev" title="Specification" href="spec.html">
+
+    <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>Multi-Language Hierarchical Programming Interface - ml-hpi</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">ml-hpi</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">ml-hpi</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="spec.html">Specification</a><input aria-label="Toggle navigation of Specification" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Multi-Language Hierarchical Programming Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="language_bindings.html">Language Bindings</a><input aria-label="Toggle navigation of Language Bindings" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="bindings/systemverilog.html">SystemVerilog Bindings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bindings/cpp.html">C++ Bindings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bindings/python.html">Python Bindings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bindings/c.html">C Bindings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bindings/pss.html">PSS Bindings</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="papers/index.html">Papers</a><input aria-label="Toggle navigation of Papers" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ml_hpi_whitepaper.html">Multi-Language Hierarchical Programming Interface (ml-hpi)</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/ml_hpi.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="multi-language-hierarchical-programming-interface">
+<h1>Multi-Language Hierarchical Programming Interface<a class="headerlink" href="#multi-language-hierarchical-programming-interface" title="Link to this heading">¶</a></h1>
+<p>In the functional verification space, multi-environment and multi-language
+integration (eg SystemVerilog and C++) is performed via programming
+interfaces defined by the language standard (eg VPI, DPI, PSS function imports).
+All of these APIs leverage the C ABI for portability. The challenge
+is that UVM and PSS environments are hierarchical, and leverage
+object-oriented component hierarchies that group state (data) with
+operations. In contrast, existing programming interfaces are flat and
+don’t provide good support for capturing context. In addition, verification
+environments often need to qualify function capabilities – PSS
+solve vs target ; SystemVerilog blocking vs non-blocking. These
+distinctions often drive mapping decisions.</p>
+<p>The Multi-Language Hierarchical Programming Interface (ml-hpi) defines
+a JSON schema for capturing hierarchical APIs, per-language bindings,
+and tools and language integrations.</p>
+<p>ml-hpi is purely focused on methods, in contrast to other specifications,
+such as protobuf, that focus on data.</p>
+<section id="ml-hpi-schema">
+<h2>ml-hpi Schema<a class="headerlink" href="#ml-hpi-schema" title="Link to this heading">¶</a></h2>
+<p>ml-hpi defines interface types, each with methods and sub-interface ‘fields’
+that either point to an interface or an array of interfaces of the same type.
+For example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ml-hpi</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">interfaces</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.MyIf1</span>
+<span class="w">    </span><span class="nt">methods</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="w">      </span><span class="nt">rtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">void</span>
+<span class="w">      </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">abc</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">def</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span>
+<span class="w">      </span><span class="nt">attr</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">solve</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">blocking</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.MyIf2</span>
+<span class="w">    </span><span class="c1"># Could be methods here too</span>
+<span class="w">    </span><span class="nt">members</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dma0</span>
+<span class="w">      </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">field</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.MyIf1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dmas</span>
+<span class="w">      </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.MyIf1</span>
+</pre></div>
+</div>
+<p>The goal is that each language sees a hierarchical (object-oriented) interface
+that makes sense in the context of that language. For example, these interfaces
+would look like this in SystemVerilog:</p>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="n">pkg</span><span class="p">;</span>
+<span class="w">  </span><span class="n">interface</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="n">MyIf1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">abc</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">def</span><span class="p">);</span>
+<span class="w">  </span><span class="n">endclass</span>
+
+<span class="w">  </span><span class="n">interface</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="n">MyIf2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">MyIf1</span><span class="w"> </span><span class="n">dma0</span><span class="p">();</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">MyIf1</span><span class="w"> </span><span class="n">dmas_at</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dmas_size</span><span class="p">();</span>
+<span class="w">  </span><span class="n">endclass</span>
+<span class="k">endpackage</span>
+</pre></div>
+</div>
+<p>Note how methods are used to represent member fields and arrays to keep the
+API purely functional.</p>
+<p>Likewise, a C++ representation is:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">pkg</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">MyIf1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">abc</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">def</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">MyIf2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">MyIf1</span><span class="w"> </span><span class="o">*</span><span class="nf">dma0</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">MyIf1</span><span class="w"> </span><span class="o">*</span><span class="nf">dmas_at</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">dmas_size</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="interface-inheritance">
+<h3>Interface Inheritance<a class="headerlink" href="#interface-inheritance" title="Link to this heading">¶</a></h3>
+<p>An interface may extend a single base interface using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> field. The
+derived interface inherits all methods and members of the base.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ml-hpi</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">interfaces</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.BaseIf</span>
+<span class="w">    </span><span class="nt">methods</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">init</span>
+<span class="w">      </span><span class="nt">rtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">void</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.DerivedIf</span>
+<span class="w">    </span><span class="nt">extends</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.BaseIf</span>
+<span class="w">    </span><span class="nt">methods</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configure</span>
+<span class="w">      </span><span class="nt">rtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">void</span>
+<span class="w">      </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mode</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uint32</span>
+</pre></div>
+</div>
+<p>This maps to single-inheritance abstract classes in each target language:</p>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="n">pkg</span><span class="p">;</span>
+<span class="w">  </span><span class="n">interface</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="n">BaseIf</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">init</span><span class="p">();</span>
+<span class="w">  </span><span class="n">endclass</span>
+
+<span class="w">  </span><span class="n">interface</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="n">DerivedIf</span><span class="w"> </span><span class="n">extends</span><span class="w"> </span><span class="n">BaseIf</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">configure</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="k">unsigned</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span>
+<span class="w">  </span><span class="n">endclass</span>
+<span class="k">endpackage</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">pkg</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">BaseIf</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">DerivedIf</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">BaseIf</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configure</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Multiple inheritance is not supported; each interface may have at most one <code class="docutils literal notranslate"><span class="pre">extends</span></code> entry.</p>
+<p>The key idea is that any environment can export, or expose, an API of this form
+by providing an implementation of the proper language-specific interface classes.
+Because the classes are always pure virtual, these can be grafted onto existing
+class hierarchies. A cross-language connection can be made simply by implementing
+the shared interface in the client/requiring environment that calls that same
+interface implemented in the target/providing environment.</p>
+<p>The following languages must be supported as both client and target environments:</p>
+<ul class="simple">
+<li><p>C++</p></li>
+<li><p>C</p></li>
+<li><p>Python</p></li>
+<li><p>SystemVerilog</p></li>
+<li><p>PSS</p></li>
+</ul>
+</section>
+</section>
+<section id="type-system">
+<h2>Type System<a class="headerlink" href="#type-system" title="Link to this heading">¶</a></h2>
+<p>ml-hpi defines a fixed set of built-in scalar types for method parameters and return values. All scalar types map to well-defined, aligned types in each target language. Interface types (defined in the <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> section) are used only as sub-interface members, not as parameter or return types.</p>
+<section id="built-in-scalar-types">
+<h3>Built-in Scalar Types<a class="headerlink" href="#built-in-scalar-types" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>ml-hpi type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">void</span></code></p></td>
+<td><p>No value; valid as a return type only</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Boolean (true/false)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code></p></td>
+<td><p>8-bit signed / unsigned integer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code></p></td>
+<td><p>16-bit signed / unsigned integer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code></p></td>
+<td><p>32-bit signed / unsigned integer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code></p></td>
+<td><p>64-bit signed / unsigned integer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">addr</span></code></p></td>
+<td><p>Platform-width physical address; resolves to <code class="docutils literal notranslate"><span class="pre">addr32</span></code> or <code class="docutils literal notranslate"><span class="pre">addr64</span></code> at code-gen time</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">addr32</span></code></p></td>
+<td><p>32-bit physical address; semantically distinct from <code class="docutils literal notranslate"><span class="pre">uint32</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">addr64</span></code></p></td>
+<td><p>64-bit physical address; semantically distinct from <code class="docutils literal notranslate"><span class="pre">uint64</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uintptr</span></code></p></td>
+<td><p>Opaque pointer-sized unsigned integer (<code class="docutils literal notranslate"><span class="pre">uintptr_t</span></code>); platform-width</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">addr32</span></code> / <code class="docutils literal notranslate"><span class="pre">addr64</span></code> types are kept distinct from plain integer types so that language bindings and tools can apply address-specific handling (e.g., byte-enable generation, address space qualification, PSS <code class="docutils literal notranslate"><span class="pre">addr_t</span></code> mapping).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">uintptr</span></code> type is intended for passing opaque handles across language boundaries where the receiving side treats the value as a pointer; the actual width is platform-dependent (32 or 64 bits).</p>
+</section>
+<section id="language-type-mappings">
+<h3>Language Type Mappings<a class="headerlink" href="#language-type-mappings" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>ml-hpi</p></th>
+<th class="head"><p>C</p></th>
+<th class="head"><p>C++</p></th>
+<th class="head"><p>Python (plain)</p></th>
+<th class="head"><p>SystemVerilog</p></th>
+<th class="head"><p>PSS</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">void</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">void</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">void</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">void</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">void</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bit</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int8_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int8_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">byte</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int&lt;8&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uint8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint8_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint8_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">byte</span> <span class="pre">unsigned</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bit&lt;8&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int16_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int16_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">shortint</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int&lt;16&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uint16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint16_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint16_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">shortint</span> <span class="pre">unsigned</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bit&lt;16&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int32_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int32_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int&lt;32&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uint32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint32_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint32_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">unsigned</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bit&lt;32&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int64_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int64_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">longint</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int&lt;64&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uint64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint64_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint64_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">longint</span> <span class="pre">unsigned</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bit&lt;64&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">addr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint32_t</span></code>/<code class="docutils literal notranslate"><span class="pre">uint64_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint32_t</span></code>/<code class="docutils literal notranslate"><span class="pre">uint64_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">unsigned</span></code>/<code class="docutils literal notranslate"><span class="pre">longint</span> <span class="pre">unsigned</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">addr_t</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">addr32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint32_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint32_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">unsigned</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">addr_t</span></code> (32-bit)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">addr64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint64_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint64_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">longint</span> <span class="pre">unsigned</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">addr_t</span></code> (64-bit)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uintptr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uintptr_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uintptr_t</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chandle</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chandle</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">addr</span></code> resolves to <code class="docutils literal notranslate"><span class="pre">addr32</span></code> or <code class="docutils literal notranslate"><span class="pre">addr64</span></code> based on the platform address width configured at code-generation time. <code class="docutils literal notranslate"><span class="pre">uintptr</span></code> maps to <code class="docutils literal notranslate"><span class="pre">chandle</span></code> in SystemVerilog and PSS — the standard opaque-handle type in both languages for holding C pointers — and to <code class="docutils literal notranslate"><span class="pre">uintptr_t</span></code> in C and C++. See the <a class="reference internal" href="#python"><span class="xref myst">Python language mapping</span></a> for <code class="docutils literal notranslate"><span class="pre">ctypes</span></code> and <code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">N]</span></code> alternatives.</p>
+</div></blockquote>
+</section>
+<section id="schema-file">
+<h3>Schema File<a class="headerlink" href="#schema-file" title="Link to this heading">¶</a></h3>
+<p>The formal JSON Schema for ml-hpi YAML documents is defined in <a class="reference internal" href="#../schema/ml-hpi.schema.json"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">schema/ml-hpi.schema.json</span></code></span></a>.</p>
+</section>
+<section id="interface-path">
+<h3>Interface Path<a class="headerlink" href="#interface-path" title="Link to this heading">¶</a></h3>
+<p>An <strong>interface path</strong> is a single non-negative integer that uniquely identifies any interface instance within a root interface hierarchy. Paths are a <strong>runtime</strong> concept — they are not part of the IDL schema, and they do not need to be computed until an implementation is created and registered. At that point every node in the hierarchy must be assigned a path so that a caller can navigate from root to any sub-interface using a single opaque integer handle.</p>
+<section id="path-assignment-rules">
+<h4>Path Assignment Rules<a class="headerlink" href="#path-assignment-rules" title="Link to this heading">¶</a></h4>
+<p>Paths are assigned depth-first, left-to-right (in declaration order), using the following recursive size rules:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Node kind</p></th>
+<th class="head"><p>Size (slots)</p></th>
+<th class="head"><p>Path of node</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Leaf interface (no sub-interface members)</p></td>
+<td><p>1</p></td>
+<td><p>Cumulative offset of preceding siblings</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">field</span></code> member of type T</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">size(T)</span></code></p></td>
+<td><p>Cumulative offset of preceding members</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">array</span></code> member of element type T</p></td>
+<td><p>1 + <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">×</span> <span class="pre">size(T)</span></code></p></td>
+<td><p>1 base-slot, then element <code class="docutils literal notranslate"><span class="pre">[i]</span></code> at <code class="docutils literal notranslate"><span class="pre">base</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">i</span> <span class="pre">×</span> <span class="pre">size(T)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A “leaf” interface is one whose <code class="docutils literal notranslate"><span class="pre">members</span></code> list is empty (i.e. it has only methods). Methods do not consume path slots — only sub-interface members do.</p>
+<p>The <strong>root interface</strong> itself is not assigned a path; the caller holds it directly. Only its <em>children</em> are addressed via path.</p>
+</section>
+<section id="worked-example">
+<h4>Worked Example<a class="headerlink" href="#worked-example" title="Link to this heading">¶</a></h4>
+<p>Using the schema example from the Language Mappings section (<code class="docutils literal notranslate"><span class="pre">BusIf</span></code> with a <code class="docutils literal notranslate"><span class="pre">regs</span></code> field and a <code class="docutils literal notranslate"><span class="pre">ports</span></code> array, both of type <code class="docutils literal notranslate"><span class="pre">RegIf</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>RegIf  → leaf interface, no sub-interface members → size = 1
+
+BusIf layout:
+  regs         field, type RegIf (size 1)  → path 0
+  ports        array, type RegIf (size 1)
+    ports base                             → path 1  (array base-slot)
+    ports[0]                               → path 2
+    ports[1]                               → path 3
+    ports[2]                               → path 4
+    ports[k]                               → path 1 + 1 + k = 2 + k
+</pre></div>
+</div>
+<p>The original terse formulation “dmas[2] is 4 (1 for dma0 + 3 for dmas[2])” decomposes as:</p>
+<ul class="simple">
+<li><p><strong>1 for dma0</strong>: <code class="docutils literal notranslate"><span class="pre">regs</span></code>/<code class="docutils literal notranslate"><span class="pre">dma0</span></code> is a <code class="docutils literal notranslate"><span class="pre">field</span></code> of type <code class="docutils literal notranslate"><span class="pre">RegIf</span></code> (size 1), so it consumes 1 slot (path 0) and the array base begins at offset 1.</p></li>
+<li><p><strong>3 for dmas[2]</strong>: array base-slot (path 1) + index 2 × size(RegIf) = 1 + 2 = 3 slots into the array section → path 4.</p></li>
+</ul>
+</section>
+<section id="nested-composite-example">
+<h4>Nested Composite Example<a class="headerlink" href="#nested-composite-example" title="Link to this heading">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>MemCtrlIf members:
+  dma0     field, type BusIf (size = 1 + 1 + 1 + ... = see below)
+  uart     field, type BusIf
+
+size(BusIf) = size(regs) + 1(array base) + size(ports[0..n-1])
+            = 1 + 1 + n×1   (for n array elements at runtime)
+</pre></div>
+</div>
+<p>Because array size is dynamic, the <strong>total size of a composite interface containing arrays can only be determined at runtime</strong>, once the number of array elements is known. This is why path assignment happens when constructing the implementation object, not at code-generation time.</p>
+</section>
+<section id="navigation-algorithm">
+<h4>Navigation Algorithm<a class="headerlink" href="#navigation-algorithm" title="Link to this heading">¶</a></h4>
+<p>Given a root interface handle and a path integer <code class="docutils literal notranslate"><span class="pre">p</span></code>, an implementation navigates as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">navigate</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+  <span class="n">remaining</span> <span class="o">=</span> <span class="n">p</span>
+  <span class="k">for</span> <span class="n">each</span> <span class="n">member</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">declaration</span> <span class="n">order</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">field</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">remaining</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">navigate</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">m</span><span class="p">(),</span> <span class="n">remaining</span><span class="p">)</span>
+      <span class="n">remaining</span> <span class="o">-=</span> <span class="n">size</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">array</span><span class="p">:</span>
+      <span class="n">remaining</span> <span class="o">-=</span> <span class="mi">1</span>                          <span class="c1"># skip array base-slot</span>
+      <span class="n">element_size</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">element_type</span><span class="p">)</span>
+      <span class="n">idx</span> <span class="o">=</span> <span class="n">remaining</span> <span class="o">/</span> <span class="n">element_size</span>
+      <span class="n">offset</span> <span class="o">=</span> <span class="n">remaining</span> <span class="o">%</span> <span class="n">element_size</span>
+      <span class="k">if</span> <span class="n">offset</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">.</span><span class="n">m_at</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">navigate</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">m_at</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="n">offset</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">...</span> <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="implementation-use">
+<h4>Implementation Use<a class="headerlink" href="#implementation-use" title="Link to this heading">¶</a></h4>
+<p>When a language binding creates a concrete implementation of a root interface, it typically:</p>
+<ol class="arabic simple">
+<li><p><strong>Allocates a flat array</strong> of interface pointers sized to the total path space.</p></li>
+<li><p><strong>Traverses the hierarchy</strong> depth-first, populating each slot with a pointer to the corresponding sub-interface object.</p></li>
+<li><p><strong>Stores the array</strong> alongside the root handle so that any path lookup is an O(1) index into the array.</p></li>
+</ol>
+<p>The C binding, for example, can store this as:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pkg_BusIf_t</span><span class="w">  </span><span class="n">root</span><span class="p">;</span><span class="w">         </span><span class="cm">/* the root interface struct */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w">        </span><span class="o">*</span><span class="n">path_table</span><span class="p">[];</span><span class="w"> </span><span class="cm">/* flat array, indexed by path */</span>
+<span class="p">}</span><span class="w"> </span><span class="n">pkg_BusIf_impl_t</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In Python and C++ the same concept applies using a <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">std::vector&lt;void*&gt;</span></code> respectively. The implementation populates the table once during construction; callers then use a path integer to retrieve the right sub-interface without re-traversing the tree.</p>
+</section>
+</section>
+</section>
+<section id="language-mappings">
+<h2>Language Mappings<a class="headerlink" href="#language-mappings" title="Link to this heading">¶</a></h2>
+<p>All five languages are supported as both <strong>client</strong> (caller) and <strong>target</strong> (implementor) environments. The sections below specify how each ml-hpi construct maps to language-specific idioms. The worked examples all use the following interface definition as a reference:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ml-hpi</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">interfaces</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.RegIf</span>
+<span class="w">    </span><span class="nt">methods</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write32</span>
+<span class="w">      </span><span class="nt">rtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">void</span>
+<span class="w">      </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">addr</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">addr</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uint32</span>
+<span class="w">      </span><span class="nt">attr</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">blocking</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read32</span>
+<span class="w">      </span><span class="nt">rtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uint32</span>
+<span class="w">      </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">addr</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">addr</span>
+<span class="w">      </span><span class="nt">attr</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">blocking</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.BusIf</span>
+<span class="w">    </span><span class="nt">members</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regs</span>
+<span class="w">      </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">field</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.RegIf</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ports</span>
+<span class="w">      </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.RegIf</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.ExtRegIf</span>
+<span class="w">    </span><span class="nt">extends</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg.RegIf</span>
+<span class="w">    </span><span class="nt">methods</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reset</span>
+<span class="w">      </span><span class="nt">rtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">void</span>
+<span class="w">      </span><span class="nt">attr</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">blocking</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<section id="systemverilog">
+<h3>SystemVerilog<a class="headerlink" href="#systemverilog" title="Link to this heading">¶</a></h3>
+<section id="interface-definition">
+<h4>Interface Definition<a class="headerlink" href="#interface-definition" title="Link to this heading">¶</a></h4>
+<p>ml-hpi interfaces map to <code class="docutils literal notranslate"><span class="pre">interface</span> <span class="pre">class</span></code> declarations inside a <code class="docutils literal notranslate"><span class="pre">package</span></code> named after the ml-hpi package prefix. Interface classes carry no state; all methods are <code class="docutils literal notranslate"><span class="pre">pure</span> <span class="pre">virtual</span></code>.</p>
+</section>
+<section id="method-mapping">
+<h4>Method Mapping<a class="headerlink" href="#method-mapping" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method attribute</p></th>
+<th class="head"><p>SV construct</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">blocking:</span> <span class="pre">false</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pure</span> <span class="pre">virtual</span> <span class="pre">function</span></code></p></td>
+<td><p>Returns value directly</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">blocking:</span> <span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">rtype:</span> <span class="pre">void</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pure</span> <span class="pre">virtual</span> <span class="pre">task</span></code></p></td>
+<td><p>Task with no output args</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">blocking:</span> <span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">rtype:</span> <span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pure</span> <span class="pre">virtual</span> <span class="pre">task</span></code></p></td>
+<td><p>Non-void return becomes <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">T</span> <span class="pre">rval</span></code> as the <strong>first</strong> parameter</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="member-mapping">
+<h4>Member Mapping<a class="headerlink" href="#member-mapping" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Member kind</p></th>
+<th class="head"><p>SV construct</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">field</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pure</span> <span class="pre">virtual</span> <span class="pre">function</span> <span class="pre">IfType</span> <span class="pre">name()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">array</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pure</span> <span class="pre">virtual</span> <span class="pre">function</span> <span class="pre">IfType</span> <span class="pre">name_at(int</span> <span class="pre">idx)</span></code> + <code class="docutils literal notranslate"><span class="pre">pure</span> <span class="pre">virtual</span> <span class="pre">function</span> <span class="pre">int</span> <span class="pre">name_size()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="inheritance">
+<h4>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">¶</a></h4>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="n">interface</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="n">DerivedIf</span><span class="w"> </span><span class="n">extends</span><span class="w"> </span><span class="n">BaseIf</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h4>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="n">pkg</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">interface</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="n">RegIf</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// blocking task, non-void return → output rval first</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">task</span><span class="w"> </span><span class="n">write32</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="kt">longint</span><span class="w"> </span><span class="k">unsigned</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="k">unsigned</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">task</span><span class="w"> </span><span class="n">read32</span><span class="p">(</span><span class="k">output</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="k">unsigned</span><span class="w"> </span><span class="n">rval</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="kt">longint</span><span class="w"> </span><span class="k">unsigned</span><span class="w"> </span><span class="n">addr</span><span class="p">);</span>
+<span class="w">  </span><span class="n">endclass</span>
+
+<span class="w">  </span><span class="n">interface</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="n">BusIf</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">RegIf</span><span class="w"> </span><span class="n">regs</span><span class="p">();</span><span class="w">            </span><span class="c1">// field</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">RegIf</span><span class="w"> </span><span class="n">ports_at</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="p">);</span><span class="w"> </span><span class="c1">// array</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="kt">int</span><span class="w">   </span><span class="n">ports_size</span><span class="p">();</span>
+<span class="w">  </span><span class="n">endclass</span>
+
+<span class="w">  </span><span class="n">interface</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="n">ExtRegIf</span><span class="w"> </span><span class="n">extends</span><span class="w"> </span><span class="n">RegIf</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pure</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">reset</span><span class="p">();</span><span class="w">            </span><span class="c1">// non-blocking</span>
+<span class="w">  </span><span class="n">endclass</span>
+
+<span class="k">endpackage</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="as-a-c-callable-target-environment">
+<h3>As a C-callable target environment<a class="headerlink" href="#as-a-c-callable-target-environment" title="Link to this heading">¶</a></h3>
+<p>When SystemVerilog is the <strong>target</strong> (implementor) and C/C++ is the <strong>client</strong> (caller), the DPI export/import mechanism bridges the two environments. Because DPI is flat, the hierarchical interface structure is encoded in two extra arguments prepended to every exported function: a <strong>root instance ID</strong> and an <strong>interface path</strong>.</p>
+<section id="overview">
+<h4>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>C caller                                   SystemVerilog target
+---------                                  ----------------------
+  pkg_RegIf_write32(root, path, ...) → export dispatches via path table
+                                           → forks task (blocking method)
+  pkg_RegIf_write32_complete(cb,...) ← import called on task completion
+</pre></div>
+</div>
+<p>Registration is a pure SV concern. A generated <strong>Root class</strong> per interface type owns the instance registry. The user calls <code class="docutils literal notranslate"><span class="pre">BusIfRoot::register(impl)</span></code> from their testbench and receives a root_id, which they pass to C through whatever mechanism suits their flow (plusarg, VPI, a user-written DPI export, etc.).</p>
+</section>
+<section id="naming-convention">
+<h4>Naming Convention<a class="headerlink" href="#naming-convention" title="Link to this heading">¶</a></h4>
+<p>All generated DPI identifiers follow the pattern:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Purpose</p></th>
+<th class="head"><p>Name pattern</p></th>
+<th class="head"><p>DPI direction</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Method call (non-blocking)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{pkg}_{IfName}_{method}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">export</span></code> (SV provides)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Method call (blocking)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{pkg}_{IfName}_{method}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">export</span></code> (SV provides)</p></td>
+</tr>
+<tr class="row-even"><td><p>Blocking completion</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{pkg}_{IfName}_{method}_complete</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">import</span></code> (C provides)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Package dots are replaced with underscores: <code class="docutils literal notranslate"><span class="pre">pkg.sub</span></code> → <code class="docutils literal notranslate"><span class="pre">pkg_sub_...</span></code>.</p>
+<p>Root registration has no DPI identifier — it is handled entirely within SV.</p>
+</section>
+<section id="the-root-class">
+<h4>The Root Class<a class="headerlink" href="#the-root-class" title="Link to this heading">¶</a></h4>
+<p>For each interface type that may serve as a root, a <code class="docutils literal notranslate"><span class="pre">{IfName}Root</span></code> class is generated. It carries a static registry mapping integer IDs to interface instances and provides a single static method:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nc">BusIfRoot</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Static registry: root_id → implementation handle</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">BusIf</span><span class="w"> </span><span class="n">__registry</span><span class="p">[</span><span class="kt">int</span><span class="p">];</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w">        </span><span class="n">__next_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Register an implementation; returns a root_id for use by C callers</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">register</span><span class="p">(</span><span class="n">pkg</span><span class="o">::</span><span class="n">BusIf</span><span class="w"> </span><span class="n">impl</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">__next_id</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">__registry</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">impl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">  </span><span class="k">endfunction</span>
+
+<span class="w">  </span><span class="c1">// Internal: look up a registered instance</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">BusIf</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">__registry</span><span class="p">[</span><span class="n">root_id</span><span class="p">];</span>
+<span class="w">  </span><span class="k">endfunction</span>
+
+<span class="kd">endclass</span>
+</pre></div>
+</div>
+<p>The user instantiates their concrete implementation class (which implements <code class="docutils literal notranslate"><span class="pre">pkg::BusIf</span></code>) and calls <code class="docutils literal notranslate"><span class="pre">BusIfRoot::register()</span></code> from an <code class="docutils literal notranslate"><span class="pre">initial</span></code> block:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">  </span><span class="k">automatic</span><span class="w"> </span><span class="n">my_bus_impl</span><span class="w"> </span><span class="n">impl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">();</span>
+<span class="w">  </span><span class="k">automatic</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BusIfRoot</span><span class="o">::</span><span class="n">register</span><span class="p">(</span><span class="n">impl</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// Pass root_id to C — user chooses how (plusarg, VPI, user DPI export, etc.)</span>
+<span class="w">  </span><span class="p">$</span><span class="n">display</span><span class="p">(</span><span class="s">&quot;bus root_id = %0d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">root_id</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">BusIfRoot</span></code> has no inheritance relationship with the interface class itself; it is a standalone utility class that only holds the registry.</p>
+</section>
+<section id="function-arguments">
+<h4>Function Arguments<a class="headerlink" href="#function-arguments" title="Link to this heading">¶</a></h4>
+<p>Every DPI export takes <code class="docutils literal notranslate"><span class="pre">root_id</span></code> and <code class="docutils literal notranslate"><span class="pre">path</span></code> as its first two parameters, followed by method parameters in declaration order. For blocking methods a <code class="docutils literal notranslate"><span class="pre">chandle</span> <span class="pre">cb</span></code> completion token is appended as the last parameter.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Non</span><span class="o">-</span><span class="n">blocking</span><span class="p">:</span>
+<span class="n">export</span> <span class="s2">&quot;DPI-C&quot;</span> <span class="n">function</span> <span class="p">{</span><span class="n">pkg</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">If</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">method</span><span class="p">};</span>
+<span class="n">function</span> <span class="n">automatic</span> <span class="p">{</span><span class="n">rtype</span><span class="p">}</span> <span class="p">{</span><span class="n">pkg</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">If</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">method</span><span class="p">}(</span>
+    <span class="nb">int</span> <span class="n">root_id</span><span class="p">,</span>
+    <span class="nb">int</span> <span class="n">path</span><span class="p">,</span>
+    <span class="p">{</span><span class="n">param0_type</span><span class="p">}</span> <span class="p">{</span><span class="n">param0</span><span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Blocking</span><span class="p">:</span>
+<span class="n">export</span> <span class="s2">&quot;DPI-C&quot;</span> <span class="n">function</span> <span class="p">{</span><span class="n">pkg</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">If</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">method</span><span class="p">};</span>
+<span class="n">function</span> <span class="n">automatic</span> <span class="n">void</span> <span class="p">{</span><span class="n">pkg</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">If</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">method</span><span class="p">}(</span>
+    <span class="nb">int</span> <span class="n">root_id</span><span class="p">,</span>
+    <span class="nb">int</span> <span class="n">path</span><span class="p">,</span>
+    <span class="p">{</span><span class="n">param0_type</span><span class="p">}</span> <span class="p">{</span><span class="n">param0</span><span class="p">},</span>
+    <span class="o">...</span><span class="p">,</span>
+    <span class="n">chandle</span> <span class="n">cb</span>      <span class="o">//</span> <span class="n">completion</span> <span class="n">token</span> <span class="n">passed</span> <span class="n">back</span> <span class="n">to</span> <span class="n">C</span> <span class="n">on</span> <span class="n">finish</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Blocking DPI exports are always declared as <code class="docutils literal notranslate"><span class="pre">function</span></code> (not <code class="docutils literal notranslate"><span class="pre">task</span></code>) so that they return immediately to C — the actual task is forked internally.</p>
+</section>
+<section id="blocking-completion-imports">
+<h4>Blocking Completion Imports<a class="headerlink" href="#blocking-completion-imports" title="Link to this heading">¶</a></h4>
+<p>For each blocking method, C provides an import that SV calls when the forked task finishes:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// void return:</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">pkg_RegIf_write32_complete</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">cb</span><span class="p">);</span>
+
+<span class="c1">// non-void return — result passed as final argument:</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">pkg_RegIf_read32_complete</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">rval</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// Generated imports</span>
+<span class="kn">import</span><span class="w"> </span><span class="err">&quot;</span><span class="nn">DPI</span><span class="o">-</span><span class="n">C</span><span class="s">&quot; function void pkg_RegIf_write32_complete(chandle cb);</span>
+<span class="kn">import</span><span class="w"> </span><span class="err">&quot;</span><span class="nn">DPI</span><span class="o">-</span><span class="n">C</span><span class="s">&quot; function void pkg_RegIf_read32_complete(chandle cb, int unsigned rval);</span>
+</pre></div>
+</div>
+</section>
+<section id="navigation-root-id-path-interface-instance">
+<h4>Navigation: Root ID + Path → Interface Instance<a class="headerlink" href="#navigation-root-id-path-interface-instance" title="Link to this heading">¶</a></h4>
+<p>The generated navigation function looks up the root instance via <code class="docutils literal notranslate"><span class="pre">BusIfRoot::get()</span></code> and resolves the interface path depth-first.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// SV-side generated navigation helper for pkg::BusIf → pkg::RegIf</span>
+<span class="k">function</span><span class="w"> </span><span class="k">automatic</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">RegIf</span><span class="w"> </span><span class="n">navigate_BusIf_to_RegIf</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">path</span><span class="p">);</span>
+<span class="w">  </span><span class="k">automatic</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">BusIf</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BusIfRoot</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="n">root_id</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">path</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">root</span><span class="p">.</span><span class="n">regs</span><span class="p">();</span><span class="w">   </span><span class="c1">// path 0 → regs field (size 1)</span>
+<span class="w">  </span><span class="n">path</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// consumed regs</span>
+<span class="w">  </span><span class="n">path</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// consumed array base-slot</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">root</span><span class="p">.</span><span class="n">ports_at</span><span class="p">(</span><span class="n">path</span><span class="p">);</span><span class="w">          </span><span class="c1">// remaining path = array index</span>
+<span class="k">endfunction</span>
+</pre></div>
+</div>
+<p>For deeper hierarchies the navigate function recurses into sub-interface roots in declaration order.</p>
+</section>
+<section id="complete-generated-example">
+<h4>Complete Generated Example<a class="headerlink" href="#complete-generated-example" title="Link to this heading">¶</a></h4>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">pkg.RegIf</span></code> / <code class="docutils literal notranslate"><span class="pre">pkg.BusIf</span></code> schema from the Language Mappings reference:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// ---------------------------------------------------------------</span>
+<span class="c1">// Generated Root class for pkg::BusIf</span>
+<span class="c1">// ---------------------------------------------------------------</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">pkg_BusIfRoot</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">BusIf</span><span class="w"> </span><span class="n">__registry</span><span class="p">[</span><span class="kt">int</span><span class="p">];</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w">        </span><span class="n">__next_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">register</span><span class="p">(</span><span class="n">pkg</span><span class="o">::</span><span class="n">BusIf</span><span class="w"> </span><span class="n">impl</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">__next_id</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">__registry</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">impl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">  </span><span class="k">endfunction</span>
+
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">BusIf</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">__registry</span><span class="p">[</span><span class="n">root_id</span><span class="p">];</span>
+<span class="w">  </span><span class="k">endfunction</span>
+
+<span class="kd">endclass</span>
+
+<span class="c1">// ---------------------------------------------------------------</span>
+<span class="c1">// Generated DPI package for pkg</span>
+<span class="c1">// ---------------------------------------------------------------</span>
+<span class="kn">package</span><span class="w"> </span><span class="n">pkg_dpi</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Imports — C provides these (one per blocking method)</span>
+<span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="err">&quot;</span><span class="nn">DPI</span><span class="o">-</span><span class="n">C</span><span class="s">&quot; function void pkg_RegIf_write32_complete(chandle cb);</span>
+<span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="err">&quot;</span><span class="nn">DPI</span><span class="o">-</span><span class="n">C</span><span class="s">&quot; function void pkg_RegIf_read32_complete(chandle cb,</span>
+<span class="w">                                                         </span><span class="kt">int</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">rval</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Navigation helper</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span><span class="k">automatic</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">RegIf</span><span class="w"> </span><span class="n">navigate</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">path</span><span class="p">);</span>
+<span class="w">    </span><span class="k">automatic</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">BusIf</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pkg_BusIfRoot</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="n">root_id</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">path</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">root</span><span class="p">.</span><span class="n">regs</span><span class="p">();</span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">root</span><span class="p">.</span><span class="n">ports_at</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+<span class="w">  </span><span class="k">endfunction</span>
+
+<span class="w">  </span><span class="c1">// Non-blocking: ExtRegIf::reset</span>
+<span class="w">  </span><span class="k">export</span><span class="w"> </span><span class="s">&quot;DPI-C&quot;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">pkg_ExtRegIf_reset</span><span class="p">;</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span><span class="k">automatic</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">pkg_ExtRegIf_reset</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">path</span><span class="p">);</span>
+<span class="w">    </span><span class="k">automatic</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">ExtRegIf</span><span class="w"> </span><span class="n">iface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">ExtRegIf</span><span class="p">&#39;(</span><span class="n">navigate</span><span class="p">(</span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">));</span>
+<span class="w">    </span><span class="n">iface</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+<span class="w">  </span><span class="k">endfunction</span>
+
+<span class="w">  </span><span class="c1">// Blocking: RegIf::write32 (rtype void)</span>
+<span class="w">  </span><span class="k">export</span><span class="w"> </span><span class="s">&quot;DPI-C&quot;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">pkg_RegIf_write32</span><span class="p">;</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span><span class="k">automatic</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">pkg_RegIf_write32</span><span class="p">(</span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">path</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">longint</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="kt">unsigned</span><span class="w">    </span><span class="n">data</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">chandle</span><span class="w">         </span><span class="n">cb</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">    </span><span class="k">automatic</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">RegIf</span><span class="w"> </span><span class="n">iface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navigate</span><span class="p">(</span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">);</span>
+<span class="w">    </span><span class="k">fork</span>
+<span class="w">      </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">iface</span><span class="p">.</span><span class="n">write32</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+<span class="w">        </span><span class="n">pkg_RegIf_write32_complete</span><span class="p">(</span><span class="n">cb</span><span class="p">);</span>
+<span class="w">      </span><span class="k">end</span>
+<span class="w">    </span><span class="k">join_none</span>
+<span class="w">  </span><span class="k">endfunction</span>
+
+<span class="w">  </span><span class="c1">// Blocking: RegIf::read32 (rtype uint32)</span>
+<span class="w">  </span><span class="k">export</span><span class="w"> </span><span class="s">&quot;DPI-C&quot;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">pkg_RegIf_read32</span><span class="p">;</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span><span class="k">automatic</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">pkg_RegIf_read32</span><span class="p">(</span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">path</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">longint</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span>
+<span class="w">      </span><span class="kt">chandle</span><span class="w">          </span><span class="n">cb</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">    </span><span class="k">automatic</span><span class="w"> </span><span class="n">pkg</span><span class="o">::</span><span class="n">RegIf</span><span class="w"> </span><span class="n">iface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navigate</span><span class="p">(</span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">);</span>
+<span class="w">    </span><span class="k">fork</span>
+<span class="w">      </span><span class="k">begin</span>
+<span class="w">        </span><span class="k">automatic</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">rval</span><span class="p">;</span>
+<span class="w">        </span><span class="n">iface</span><span class="p">.</span><span class="n">read32</span><span class="p">(</span><span class="n">rval</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">);</span>
+<span class="w">        </span><span class="n">pkg_RegIf_read32_complete</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="n">rval</span><span class="p">);</span>
+<span class="w">      </span><span class="k">end</span>
+<span class="w">    </span><span class="k">join_none</span>
+<span class="w">  </span><span class="k">endfunction</span>
+
+<span class="k">endpackage</span>
+
+<span class="c1">// ---------------------------------------------------------------</span>
+<span class="c1">// User testbench: instantiate impl and register it</span>
+<span class="c1">// ---------------------------------------------------------------</span>
+<span class="k">module</span><span class="w"> </span><span class="n">tb</span><span class="p">;</span>
+<span class="w">  </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">automatic</span><span class="w"> </span><span class="n">my_bus_impl</span><span class="w"> </span><span class="n">impl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">();</span>
+<span class="w">    </span><span class="k">automatic</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pkg_BusIfRoot</span><span class="o">::</span><span class="n">register</span><span class="p">(</span><span class="n">impl</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// hand root_id to C — e.g. via a user-written DPI export or plusarg</span>
+<span class="w">    </span><span class="p">$</span><span class="n">display</span><span class="p">(</span><span class="s">&quot;pkg::BusIf root_id = %0d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">root_id</span><span class="p">);</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</pre></div>
+</div>
+</section>
+<section id="c-side-usage">
+<h4>C-Side Usage<a class="headerlink" href="#c-side-usage" title="Link to this heading">¶</a></h4>
+<p>C receives the root_id out-of-band (the mechanism is user-defined) and then calls the DPI exports directly:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+
+<span class="cm">/* Provided by the generated C header (declarations only — SV exports these) */</span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pkg_RegIf_write32</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">path</span><span class="p">,</span>
+<span class="w">                               </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">cb</span><span class="p">);</span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pkg_RegIf_read32</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">path</span><span class="p">,</span>
+<span class="w">                               </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">cb</span><span class="p">);</span>
+
+<span class="cm">/* State for a pending async call */</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">done</span><span class="p">;</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">pending_t</span><span class="p">;</span>
+
+<span class="cm">/* Completion imports — C provides, SV calls when tasks finish */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">pkg_RegIf_write32_complete</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">cb</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">((</span><span class="n">pending_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">cb</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">pkg_RegIf_read32_complete</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">rval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pending_t</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">pending_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">cb</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rval</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">done</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Example: synchronous-style blocking read using spin-wait */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="nf">bus_read32</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pending_t</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span>
+<span class="w">    </span><span class="n">pkg_RegIf_read32</span><span class="p">(</span><span class="n">root_id</span><span class="p">,</span><span class="w"> </span><span class="cm">/*path=regs*/</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="p">.</span><span class="n">done</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* yield to scheduler */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="summary-of-dpi-constraints">
+<h4>Summary of DPI Constraints<a class="headerlink" href="#summary-of-dpi-constraints" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Constraint</p></th>
+<th class="head"><p>Consequence</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DPI exports cannot be tasks at the C boundary</p></td>
+<td><p>Blocking methods always export as <code class="docutils literal notranslate"><span class="pre">function</span> <span class="pre">void</span></code>; tasks are forked internally</p></td>
+</tr>
+<tr class="row-odd"><td><p>DPI has no OOP</p></td>
+<td><p>Hierarchy encoded via <code class="docutils literal notranslate"><span class="pre">root_id</span></code> + <code class="docutils literal notranslate"><span class="pre">path</span></code> arguments</p></td>
+</tr>
+<tr class="row-even"><td><p>Registration is SV-only</p></td>
+<td><p>No C import for registration; <code class="docutils literal notranslate"><span class="pre">{IfName}Root::register()</span></code> is a pure SV static method</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chandle</span></code> is opaque</p></td>
+<td><p>C can pass any pointer as <code class="docutils literal notranslate"><span class="pre">cb</span></code>; SV must not dereference it</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fork</span> <span class="pre">join_none</span></code> return timing</p></td>
+<td><p>C receives control immediately; completion arrives asynchronously via import</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thread safety</p></td>
+<td><p>SV is single-threaded within a time-step; concurrent blocking calls are serialized by the simulator scheduler</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="c">
+<h3>C++<a class="headerlink" href="#c" title="Link to this heading">¶</a></h3>
+<section id="id1">
+<h4>Interface Definition<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<p>ml-hpi interfaces map to C++ abstract classes (all methods <code class="docutils literal notranslate"><span class="pre">=</span> <span class="pre">0</span></code>) inside a namespace corresponding to the package prefix. Headers should include <code class="docutils literal notranslate"><span class="pre">&lt;cstdint&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;functional&gt;</span></code>.</p>
+</section>
+<section id="id2">
+<h4>Method Mapping<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method attribute</p></th>
+<th class="head"><p>C++ form</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">blocking:</span> <span class="pre">false</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">rtype</span> <span class="pre">name(params)</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+<td><p>Returns value directly</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">blocking:</span> <span class="pre">true</span></code> (sync)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">rtype</span> <span class="pre">name(params)</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+<td><p>Blocks internally; implementation may use pthread, coroutine, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">blocking:</span> <span class="pre">true</span></code> (async)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">void</span> <span class="pre">name(params,</span> <span class="pre">std::function&lt;void(rtype)&gt;</span> <span class="pre">cb)</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+<td><p>Callback-based; return value delivered via <code class="docutils literal notranslate"><span class="pre">cb</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Both sync and async blocking forms may be generated; the choice is a code-generation policy. The async form is omitted when <code class="docutils literal notranslate"><span class="pre">rtype</span></code> is <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p>
+</section>
+<section id="id3">
+<h4>Member Mapping<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Member kind</p></th>
+<th class="head"><p>C++ construct</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">field</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">IfType</span> <span class="pre">*name()</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">array</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">IfType</span> <span class="pre">*name_at(int</span> <span class="pre">idx)</span> <span class="pre">=</span> <span class="pre">0</span></code> + <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">int</span> <span class="pre">name_size()</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id4">
+<h4>Inheritance<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DerivedIf</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">BaseIf</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
+</div>
+<p>Virtual inheritance is used to support diamond-safe composition.</p>
+</section>
+<section id="id5">
+<h4>Example<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdint&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;functional&gt;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">pkg</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">RegIf</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">RegIf</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// blocking – sync form</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w">     </span><span class="nf">write32</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">read32</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// blocking – async form</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w">     </span><span class="nf">write32</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cb</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w">     </span><span class="nf">read32</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cb</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">BusIf</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">BusIf</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">RegIf</span><span class="w"> </span><span class="o">*</span><span class="nf">regs</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                  </span><span class="c1">// field</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">RegIf</span><span class="w"> </span><span class="o">*</span><span class="nf">ports_at</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">       </span><span class="c1">// array</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="nf">ports_size</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">ExtRegIf</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">RegIf</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">reset</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                   </span><span class="c1">// non-blocking</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace pkg</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h3>C<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<section id="id7">
+<h4>Interface Definition<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<p>ml-hpi interfaces map to C structs containing function pointers. Each function pointer takes <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*self</span></code> as its first argument to carry the implementation context. Sub-interface <code class="docutils literal notranslate"><span class="pre">field</span></code> members are direct struct pointers; <code class="docutils literal notranslate"><span class="pre">array</span></code> members use <code class="docutils literal notranslate"><span class="pre">_at</span></code> / <code class="docutils literal notranslate"><span class="pre">_size</span></code> function pointers. Type names follow the pattern <code class="docutils literal notranslate"><span class="pre">{pkg}_{Name}_t</span></code> (package dots replaced by underscores).</p>
+</section>
+<section id="id8">
+<h4>Method Mapping<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
+<p>All methods become function pointers with <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*self</span></code> as the first parameter:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">rtype</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">method_name</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">...);</span>
+</pre></div>
+</div>
+<p>Blocking methods block internally; there is no separate async form in the C binding.</p>
+</section>
+<section id="id9">
+<h4>Member Mapping<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Member kind</p></th>
+<th class="head"><p>C struct member</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">field</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pkg_IfType_t</span> <span class="pre">*name;</span></code> (direct pointer, set at initialisation time)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">array</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pkg_IfType_t</span> <span class="pre">*(*name_at)(void</span> <span class="pre">*self,</span> <span class="pre">int</span> <span class="pre">idx);</span></code> + <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">(*name_size)(void</span> <span class="pre">*self);</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id10">
+<h4>Inheritance<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
+<p>The derived struct embeds the base struct as its <strong>first</strong> member, enabling safe upcasting via pointer cast:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pkg_DerivedIf_s</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pkg_BaseIf_t</span><span class="w"> </span><span class="n">base</span><span class="p">;</span><span class="w">   </span><span class="cm">/* MUST be first */</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span><span class="w"> </span><span class="n">pkg_DerivedIf_t</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h4>Example<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+
+<span class="cm">/* Forward declarations */</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pkg_RegIf_s</span><span class="w">    </span><span class="n">pkg_RegIf_t</span><span class="p">;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pkg_BusIf_s</span><span class="w">    </span><span class="n">pkg_BusIf_t</span><span class="p">;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pkg_ExtRegIf_s</span><span class="w"> </span><span class="n">pkg_ExtRegIf_t</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pkg_RegIf_s</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w">     </span><span class="p">(</span><span class="o">*</span><span class="n">write32</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">read32</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">addr</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="n">pkg_RegIf_t</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pkg_BusIf_s</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pkg_RegIf_t</span><span class="w">  </span><span class="o">*</span><span class="n">regs</span><span class="p">;</span><span class="w">                                    </span><span class="cm">/* field  */</span>
+<span class="w">    </span><span class="n">pkg_RegIf_t</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">ports_at</span><span class="p">)</span><span class="w">  </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="p">);</span><span class="w">       </span><span class="cm">/* array  */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w">          </span><span class="p">(</span><span class="o">*</span><span class="n">ports_size</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="n">pkg_BusIf_t</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pkg_ExtRegIf_s</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pkg_RegIf_t</span><span class="w"> </span><span class="n">base</span><span class="p">;</span><span class="w">                          </span><span class="cm">/* MUST be first */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">reset</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="n">pkg_ExtRegIf_t</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Link to this heading">¶</a></h3>
+<section id="id12">
+<h4>Interface Definition<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
+<p>ml-hpi interfaces map to <code class="docutils literal notranslate"><span class="pre">typing.Protocol</span></code> classes. Protocols use structural subtyping — any class implementing the required methods satisfies the interface without explicit subclassing.</p>
+<p>Three type representation styles are supported for parameters and return values:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Style</p></th>
+<th class="head"><p>When to use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Plain</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>)</p></td>
+<td><p>Simplest; no width or signedness information</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">ctypes</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">ctypes.c_int32</span></code>, etc.)</p></td>
+<td><p>When the implementation interacts with ctypes-based FFI</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">Annotated</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">N]</span></code>)</p></td>
+<td><p>Lightweight width hint usable by code-generation tools</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For the <code class="docutils literal notranslate"><span class="pre">Annotated</span></code> style, the metadata integer <code class="docutils literal notranslate"><span class="pre">N</span></code> is the bit width. Signedness is not encoded in the annotation itself — use named type aliases (e.g. <code class="docutils literal notranslate"><span class="pre">Int32</span></code>, <code class="docutils literal notranslate"><span class="pre">UInt32</span></code>) to preserve that distinction. Both resolve to the same <code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">N]</span></code> at runtime.</p>
+</section>
+<section id="type-mapping">
+<h4>Type Mapping<a class="headerlink" href="#type-mapping" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>ml-hpi</p></th>
+<th class="head"><p>ctypes</p></th>
+<th class="head"><p>Annotated</p></th>
+<th class="head"><p>Plain</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">void</span></code></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_int8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">8]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uint8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_uint8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">8]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_int16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">16]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uint16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_uint16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">16]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_int32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">32]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uint32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_uint32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">32]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_int64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">64]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uint64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_uint64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">64]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">addr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">ctypes.c_uint64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">32]</span></code> / <code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">64]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">addr32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_uint32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">32]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">addr64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_uint64</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">64]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uintptr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_void_p</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ctypes.c_void_p</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">addr</span></code> resolves at code-generation time based on platform address width. <code class="docutils literal notranslate"><span class="pre">uintptr</span></code> uses <code class="docutils literal notranslate"><span class="pre">ctypes.c_void_p</span></code> in both ctypes and Annotated styles, as it is an opaque pointer — not a general-purpose integer.</p>
+</div></blockquote>
+</section>
+<section id="id13">
+<h4>Method Mapping<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method attribute</p></th>
+<th class="head"><p>Python form</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">blocking:</span> <span class="pre">false</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">name(self,</span> <span class="pre">...)</span> <span class="pre">-&gt;</span> <span class="pre">rtype:</span> <span class="pre">...</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">blocking:</span> <span class="pre">true</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">def</span> <span class="pre">name(self,</span> <span class="pre">...)</span> <span class="pre">-&gt;</span> <span class="pre">rtype:</span> <span class="pre">...</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id14">
+<h4>Member Mapping<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Member kind</p></th>
+<th class="head"><p>Python construct</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">field</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">name(self)</span> <span class="pre">-&gt;</span> <span class="pre">IfType:</span> <span class="pre">...</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">array</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">name_at(self,</span> <span class="pre">idx:</span> <span class="pre">int)</span> <span class="pre">-&gt;</span> <span class="pre">IfType:</span> <span class="pre">...</span></code> + <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">name_size(self)</span> <span class="pre">-&gt;</span> <span class="pre">int:</span> <span class="pre">...</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id15">
+<h4>Inheritance<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DerivedIf</span><span class="p">(</span><span class="n">BaseIf</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="id16">
+<h4>Example<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h4>
+<p>All three styles generate equivalent Protocols. The <code class="docutils literal notranslate"><span class="pre">Annotated</span></code> aliases can be shared from a generated <code class="docutils literal notranslate"><span class="pre">ml_hpi_types</span></code> module.</p>
+<p><strong>Plain style:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RegIf</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">write32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BusIf</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">regs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegIf</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ports_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegIf</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ports_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExtRegIf</span><span class="p">(</span><span class="n">RegIf</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">Annotated</span></code> style:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+
+<span class="c1"># Named aliases — same Annotated[int, N] repr, distinct names for signed/unsigned</span>
+<span class="n">Addr</span>   <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>   <span class="c1"># platform-width; 32 on 32-bit targets</span>
+<span class="n">UInt32</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RegIf</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">write32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="n">Addr</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">UInt32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="n">Addr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UInt32</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BusIf</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">regs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegIf</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ports_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegIf</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ports_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExtRegIf</span><span class="p">(</span><span class="n">RegIf</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">ctypes</span></code> style:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RegIf</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">write32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BusIf</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">regs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegIf</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ports_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RegIf</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ports_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExtRegIf</span><span class="p">(</span><span class="n">RegIf</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pss">
+<h3>PSS<a class="headerlink" href="#pss" title="Link to this heading">¶</a></h3>
+<section id="id17">
+<h4>Interface Definition<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h4>
+<p>ml-hpi interfaces map to PSS <code class="docutils literal notranslate"><span class="pre">component</span></code> types inside a <code class="docutils literal notranslate"><span class="pre">package</span></code>. Sub-interface members are declared as component sub-instances or arrays. Methods are declared as <code class="docutils literal notranslate"><span class="pre">function</span></code> prototypes; the <code class="docutils literal notranslate"><span class="pre">solve</span></code> and <code class="docutils literal notranslate"><span class="pre">target</span></code> attributes determine the execution context in which they may be called.</p>
+</section>
+<section id="id18">
+<h4>Method Mapping<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attributes</p></th>
+<th class="head"><p>PSS construct</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">solve:</span> <span class="pre">true,</span> <span class="pre">target:</span> <span class="pre">false</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">function</span></code></p></td>
+<td><p>Callable from action solve/pre-solve context</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">solve:</span> <span class="pre">false,</span> <span class="pre">target:</span> <span class="pre">true</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">target</span> <span class="pre">function</span></code></p></td>
+<td><p>Callable from exec/target context only</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">solve:</span> <span class="pre">true,</span> <span class="pre">target:</span> <span class="pre">true</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">function</span></code></p></td>
+<td><p>Callable from both contexts</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id19">
+<h4>Member Mapping<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Member kind</p></th>
+<th class="head"><p>PSS construct</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">field</span></code></p></td>
+<td><p>Component sub-instance: <code class="docutils literal notranslate"><span class="pre">pkg::IfType</span> <span class="pre">name;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">array</span></code></p></td>
+<td><p>Component array: <code class="docutils literal notranslate"><span class="pre">array&lt;pkg::IfType,*&gt;</span> <span class="pre">name;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id20">
+<h4>Inheritance<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h4>
+<div class="highlight-pss notranslate"><div class="highlight"><pre><span></span>component pkg::DerivedIf : pkg::BaseIf {
+    ...
+};
+</pre></div>
+</div>
+</section>
+<section id="type-notes">
+<h4>Type Notes<a class="headerlink" href="#type-notes" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code> → <code class="docutils literal notranslate"><span class="pre">addr_t</span></code> (PSS native platform-width address type)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addr32</span></code> / <code class="docutils literal notranslate"><span class="pre">addr64</span></code> → <code class="docutils literal notranslate"><span class="pre">addr_t</span></code> annotated with explicit width via tool configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uintptr</span></code> → <code class="docutils literal notranslate"><span class="pre">chandle</span></code> (PSS 2.0 opaque handle type)</p></li>
+</ul>
+</section>
+<section id="id21">
+<h4>Example<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h4>
+<div class="highlight-pss notranslate"><div class="highlight"><pre><span></span>package pkg;
+
+component RegIf {
+    // target:true → exec/target context
+    target function void     write32(addr_t addr, bit&lt;32&gt; data);
+    target function bit&lt;32&gt;  read32(addr_t addr);
+};
+
+component BusIf {
+    RegIf          regs;          // field
+    array&lt;RegIf,*&gt; ports;         // array
+};
+
+component ExtRegIf : RegIf {
+    // non-blocking, target context
+    target function void reset();
+};
+
+endpackage
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="comparative-analysis-existing-tools-and-approaches">
+<h2>Comparative Analysis: Existing Tools and Approaches<a class="headerlink" href="#comparative-analysis-existing-tools-and-approaches" title="Link to this heading">¶</a></h2>
+<section id="id22">
+<h3>Overview<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
+<p>The core problem ml-hpi addresses — a <strong>language-neutral, schema-driven IDL for hierarchical, method-focused cross-language APIs spanning C, C++, Python, SystemVerilog, and PSS</strong> — is not fully solved by any single existing tool. The landscape is covered by several partial solutions, each with significant gaps.</p>
+</section>
+<hr class="docutils" />
+<section id="systemverilog-dpi-direct-programming-interface">
+<h3>SystemVerilog DPI (Direct Programming Interface)<a class="headerlink" href="#systemverilog-dpi-direct-programming-interface" title="Link to this heading">¶</a></h3>
+<p>DPI is the industry-standard mechanism for calling C/C++ from SystemVerilog and vice versa. It is flat (no hierarchy), requires manual binding code, and only bridges SV ↔ C/C++. Python and PSS have no native DPI support. There is no schema or IDL; every interface must be hand-coded. DPI forms the low-level transport layer that higher-level tools build upon.</p>
+<p><strong>Gap vs ml-hpi:</strong> Flat API only, no hierarchy, no PSS, no Python, no schema, no method attributes.</p>
+</section>
+<hr class="docutils" />
+<section id="vpi-verilog-procedural-interface">
+<h3>VPI (Verilog Procedural Interface)<a class="headerlink" href="#vpi-verilog-procedural-interface" title="Link to this heading">¶</a></h3>
+<p>VPI provides C-level callback and introspection access to the simulation hierarchy at runtime. It is event-driven and focused on signal-level and hierarchy access rather than method-call APIs. Tools like cocotb use VPI to drive simulation from Python, but at the signal level rather than the interface/method level.</p>
+<p><strong>Gap vs ml-hpi:</strong> Signal-level, not method-API level. No PSS. No schema.</p>
+</section>
+<hr class="docutils" />
+<section id="pysv">
+<h3>pysv<a class="headerlink" href="#pysv" title="Link to this heading">¶</a></h3>
+<p><a class="reference external" href="https://github.com/Kuree/pysv">pysv</a> allows Python classes and functions to be compiled (via pybind11) into a shared library and exposed to SystemVerilog as DPI-callable objects. It supports object-oriented Python ↔ SV bindings and preserves class hierarchies. The Python class is the de-facto “schema.”</p>
+<p><strong>Gap vs ml-hpi:</strong> Python-only source language (Python is the IDL). No C target. No PSS support. No method attributes (solve/target, blocking/non-blocking). Unidirectional design pattern (Python implements, SV calls).</p>
+</section>
+<hr class="docutils" />
+<section id="pyhdl-if">
+<h3>PyHDL-IF<a class="headerlink" href="#pyhdl-if" title="Link to this heading">¶</a></h3>
+<p><a class="reference external" href="https://github.com/fvutils/pyhdl-if">PyHDL-IF</a> (also from fvutils) is the closest existing tool. It uses Python decorators (<code class="docutils literal notranslate"><span class="pre">&#64;exp</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;imp</span></code>) to define APIs that are exported to or imported from SystemVerilog, with automatic SV wrapper generation. It supports <strong>bidirectional</strong> calling (Python → SV and SV → Python) and generates hierarchical interface classes. It works at the API/method level rather than the signal level.</p>
+<p><strong>Gap vs ml-hpi:</strong> Python is the IDL (not a language-neutral schema). C is not a supported target language. PSS is not a first-class target. Method attributes specific to PSS (solve/target) and SV (blocking/non-blocking) are not represented. The schema lives in Python source code, making it inaccessible to non-Python tooling.</p>
+</section>
+<hr class="docutils" />
+<section id="swig-simplified-wrapper-and-interface-generator">
+<h3>SWIG (Simplified Wrapper and Interface Generator)<a class="headerlink" href="#swig-simplified-wrapper-and-interface-generator" title="Link to this heading">¶</a></h3>
+<p>SWIG generates bindings from C/C++ headers to Python, Java, Tcl, and other scripting languages. It handles class hierarchies and inheritance. The SWIG <code class="docutils literal notranslate"><span class="pre">.i</span></code> interface file is a schema of sorts, but is C/C++-centric.</p>
+<p><strong>Gap vs ml-hpi:</strong> No SystemVerilog or PSS support. C/C++ is always the canonical source; other languages are consumers. No method attributes. No EDA-specific concepts.</p>
+</section>
+<hr class="docutils" />
+<section id="apache-thrift-protocol-buffers-cap-n-proto">
+<h3>Apache Thrift / Protocol Buffers / Cap’n Proto<a class="headerlink" href="#apache-thrift-protocol-buffers-cap-n-proto" title="Link to this heading">¶</a></h3>
+<p>These IDL-based tools define cross-language <strong>data</strong> schemas and RPC interfaces. They generate bindings for many languages (C++, Python, Java, etc.) from a neutral schema. However, they are designed for network/process-boundary communication, focus on serializable data types, and have no concept of EDA languages (SystemVerilog, PSS) or verification-specific method attributes.</p>
+<p><strong>Gap vs ml-hpi:</strong> No SystemVerilog or PSS support. Focused on data serialization rather than in-process method dispatch. IPC/RPC overhead is inappropriate for tight simulation integration. No method attributes for verification semantics.</p>
+</section>
+<hr class="docutils" />
+<section id="comparative-summary">
+<h3>Comparative Summary<a class="headerlink" href="#comparative-summary" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>DPI</p></th>
+<th class="head"><p>pysv</p></th>
+<th class="head"><p>PyHDL-IF</p></th>
+<th class="head"><p>SWIG</p></th>
+<th class="head"><p>Thrift/Protobuf</p></th>
+<th class="head"><p><strong>ml-hpi</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Language-neutral schema/IDL</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>Partial (C-centric)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hierarchical (OOP) interfaces</p></td>
+<td><p>✗</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✗</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>C++ client &amp; target</p></td>
+<td><p>✓</p></td>
+<td><p>Partial</p></td>
+<td><p>Partial</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>C client &amp; target</p></td>
+<td><p>✓</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>Python client &amp; target</p></td>
+<td><p>✗</p></td>
+<td><p>Partial</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>SystemVerilog client &amp; target</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>PSS client &amp; target</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>PSS solve/target attributes</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>SV blocking/non-blocking attrs</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✗</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>Method-focused (not data)</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+<td><p>✗</p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="conclusion">
+<h3>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h3>
+<p>No existing tool satisfies all of ml-hpi’s requirements. <strong>PyHDL-IF</strong> is the closest in spirit — bidirectional, method-focused, hierarchical, SV+Python — but uses Python source code as its implicit IDL rather than a portable schema, and lacks C and PSS support. <strong>DPI</strong> and <strong>pysv</strong> address subsets of the language matrix. General-purpose IDL tools (SWIG, Thrift, Protobuf) cover more languages but have no EDA language support and no verification-specific method semantics.</p>
+<p>ml-hpi’s unique contribution is a <strong>language-neutral YAML/JSON schema</strong> that captures hierarchical method interfaces with verification-specific attributes, from which correct per-language bindings can be generated for all five environments (C, C++, Python, SystemVerilog, PSS) as both client and target.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="language_bindings.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Language Bindings</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="spec.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Specification</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024-2025, Matthew Ballance
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Multi-Language Hierarchical Programming Interface</a><ul>
+<li><a class="reference internal" href="#ml-hpi-schema">ml-hpi Schema</a><ul>
+<li><a class="reference internal" href="#interface-inheritance">Interface Inheritance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#type-system">Type System</a><ul>
+<li><a class="reference internal" href="#built-in-scalar-types">Built-in Scalar Types</a></li>
+<li><a class="reference internal" href="#language-type-mappings">Language Type Mappings</a></li>
+<li><a class="reference internal" href="#schema-file">Schema File</a></li>
+<li><a class="reference internal" href="#interface-path">Interface Path</a><ul>
+<li><a class="reference internal" href="#path-assignment-rules">Path Assignment Rules</a></li>
+<li><a class="reference internal" href="#worked-example">Worked Example</a></li>
+<li><a class="reference internal" href="#nested-composite-example">Nested Composite Example</a></li>
+<li><a class="reference internal" href="#navigation-algorithm">Navigation Algorithm</a></li>
+<li><a class="reference internal" href="#implementation-use">Implementation Use</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#language-mappings">Language Mappings</a><ul>
+<li><a class="reference internal" href="#systemverilog">SystemVerilog</a><ul>
+<li><a class="reference internal" href="#interface-definition">Interface Definition</a></li>
+<li><a class="reference internal" href="#method-mapping">Method Mapping</a></li>
+<li><a class="reference internal" href="#member-mapping">Member Mapping</a></li>
+<li><a class="reference internal" href="#inheritance">Inheritance</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#as-a-c-callable-target-environment">As a C-callable target environment</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#naming-convention">Naming Convention</a></li>
+<li><a class="reference internal" href="#the-root-class">The Root Class</a></li>
+<li><a class="reference internal" href="#function-arguments">Function Arguments</a></li>
+<li><a class="reference internal" href="#blocking-completion-imports">Blocking Completion Imports</a></li>
+<li><a class="reference internal" href="#navigation-root-id-path-interface-instance">Navigation: Root ID + Path → Interface Instance</a></li>
+<li><a class="reference internal" href="#complete-generated-example">Complete Generated Example</a></li>
+<li><a class="reference internal" href="#c-side-usage">C-Side Usage</a></li>
+<li><a class="reference internal" href="#summary-of-dpi-constraints">Summary of DPI Constraints</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#c">C++</a><ul>
+<li><a class="reference internal" href="#id1">Interface Definition</a></li>
+<li><a class="reference internal" href="#id2">Method Mapping</a></li>
+<li><a class="reference internal" href="#id3">Member Mapping</a></li>
+<li><a class="reference internal" href="#id4">Inheritance</a></li>
+<li><a class="reference internal" href="#id5">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">C</a><ul>
+<li><a class="reference internal" href="#id7">Interface Definition</a></li>
+<li><a class="reference internal" href="#id8">Method Mapping</a></li>
+<li><a class="reference internal" href="#id9">Member Mapping</a></li>
+<li><a class="reference internal" href="#id10">Inheritance</a></li>
+<li><a class="reference internal" href="#id11">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python">Python</a><ul>
+<li><a class="reference internal" href="#id12">Interface Definition</a></li>
+<li><a class="reference internal" href="#type-mapping">Type Mapping</a></li>
+<li><a class="reference internal" href="#id13">Method Mapping</a></li>
+<li><a class="reference internal" href="#id14">Member Mapping</a></li>
+<li><a class="reference internal" href="#id15">Inheritance</a></li>
+<li><a class="reference internal" href="#id16">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pss">PSS</a><ul>
+<li><a class="reference internal" href="#id17">Interface Definition</a></li>
+<li><a class="reference internal" href="#id18">Method Mapping</a></li>
+<li><a class="reference internal" href="#id19">Member Mapping</a></li>
+<li><a class="reference internal" href="#id20">Inheritance</a></li>
+<li><a class="reference internal" href="#type-notes">Type Notes</a></li>
+<li><a class="reference internal" href="#id21">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#comparative-analysis-existing-tools-and-approaches">Comparative Analysis: Existing Tools and Approaches</a><ul>
+<li><a class="reference internal" href="#id22">Overview</a></li>
+<li><a class="reference internal" href="#systemverilog-dpi-direct-programming-interface">SystemVerilog DPI (Direct Programming Interface)</a></li>
+<li><a class="reference internal" href="#vpi-verilog-procedural-interface">VPI (Verilog Procedural Interface)</a></li>
+<li><a class="reference internal" href="#pysv">pysv</a></li>
+<li><a class="reference internal" href="#pyhdl-if">PyHDL-IF</a></li>
+<li><a class="reference internal" href="#swig-simplified-wrapper-and-interface-generator">SWIG (Simplified Wrapper and Interface Generator)</a></li>
+<li><a class="reference internal" href="#apache-thrift-protocol-buffers-cap-n-proto">Apache Thrift / Protocol Buffers / Cap’n Proto</a></li>
+<li><a class="reference internal" href="#comparative-summary">Comparative Summary</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>
