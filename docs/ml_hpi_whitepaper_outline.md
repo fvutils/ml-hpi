@@ -175,7 +175,7 @@ environments.
 
 ### 6.1 PSS and the Need for Well-Defined Interfaces
 
-- PSS (Portable Test and Stimulus Standard, IEEE 1647) describes verification intent as an
+- PSS (Accellera Portable Test and Stimulus Standard) describes verification intent as an
   action graph that can be compiled to any execution environment.
 - PSS actions call out to "platform" functionality via `function import` declarations — the PSS
   side specifies the signature; the platform side (C, SV, Python) provides the body.

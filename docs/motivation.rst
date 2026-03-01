@@ -73,8 +73,8 @@ Extending to PSS
 ----------------
 
 The same interface spec that enables UVM sequence reuse across integration
-levels also serves as the bridge to PSS (Portable Test and Stimulus Standard,
-IEEE 1647). PSS actions call platform functionality through ``function import``
+levels also serves as the bridge to PSS (Accellera Portable Test and Stimulus
+Standard). PSS actions call platform functionality through ``function import``
 declarations that must be kept in sync with DPI stubs and platform dispatch
 logic — hand work spread across three languages. Because ml-hpi already
 captures all attributes PSS needs (``blocking``, ``target``, ``solve``), the
