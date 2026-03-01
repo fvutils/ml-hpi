@@ -4,6 +4,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "svdpi.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,6 +17,14 @@ extern void tb_RegIf_read32(int root_id, int path, uint64_t addr, void *cb);
 /* Completion imports — implemented in C, called from SystemVerilog */
 void tb_RegIf_write32_complete(void *cb);
 void tb_RegIf_read32_complete(void *cb, uint32_t rval);
+
+/* Package init — C must implement:
+ *   static svScope s_tb_RegIf_dpi_scope;
+ *   int tb_RegIf_dpi_init(void) { s_tb_RegIf_dpi_scope = svGetScope(); return 0; }
+ *   void tb_RegIf_dpi_set_scope(void) { svSetScope(s_tb_RegIf_dpi_scope); }
+ */
+int  tb_RegIf_dpi_init(void);
+void tb_RegIf_dpi_set_scope(void);
 
 #ifdef __cplusplus
 }

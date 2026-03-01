@@ -2,11 +2,12 @@
 End-to-end test: C → SystemVerilog DPI path.
 
 Compile order:
-  1. ml_hpi.sv       (ml_hpi package — built-in)
-  2. tb_pkg.sv       (tb::RegIf interface class — user-supplied)
-  3. <generated>.sv  (tb_RegIfRoot class + tb_RegIf_dpi package)
-  4. tb_reg_if.sv    (tb_RegIf_impl class + tb_top module — user-supplied)
-  5. tb_dpi_test.c   (C test driver — user-supplied)
+  1. ml_hpi.sv          (ml_hpi package — built-in)
+  2. tb_pkg.sv          (tb::RegIf interface class — user-supplied)
+  3. <generated>.sv     (tb_RegIfRoot class + tb_RegIf_dpi package)
+  4. tb_test_pkg.sv     (tb_test package: test control DPI — user-supplied)
+  5. tb_reg_if.sv       (tb_RegIf_impl class + tb_top module — user-supplied)
+  6. tb_dpi_test.c      (C test driver — user-supplied)
 """
 import os
 import asyncio
@@ -89,6 +90,13 @@ def test_sv_c_path(tmpdir, sim):
         base=str(gen_dir),
         include=sv_files[0].name)
 
+    tb_test_sv = builder.mkTaskNode(
+        "std.FileSet",
+        name="tb_test_sv",
+        type="systemVerilogSource",
+        base=str(DATA_DIR),
+        include="tb_test_pkg.sv")
+
     user_sv = builder.mkTaskNode(
         "std.FileSet",
         name="user_sv",
@@ -106,7 +114,7 @@ def test_sv_c_path(tmpdir, sim):
     sim_img = builder.mkTaskNode(
         f"hdlsim.{sim}.SimImage",
         name="sim_img",
-        needs=[ml_hpi_sv, tb_pkg_sv, gen_sv_node, user_sv, user_c],
+        needs=[ml_hpi_sv, tb_pkg_sv, gen_sv_node, tb_test_sv, user_sv, user_c],
         top=["tb_top"])
 
     sim_run = builder.mkTaskNode(

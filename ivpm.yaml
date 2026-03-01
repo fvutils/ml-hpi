@@ -9,9 +9,14 @@ package:
       src: pypi
     - name: pydantic
       src: pypi
+    - name: pyslang
+      src: pypi
     - name: dv-flow-mgr
       url: https://github.com/dv-flow/dv-flow-mgr.git
     - name: dv-flow-libhdlsim
       url: https://github.com/dv-flow/dv-flow-libhdlsim.git
     - name: pytest-dfm
       url: https://github.com/dv-flow/pytest-dfm.git
+    - name: pyhdl-if
+      url: https://github.com/fvutils/pyhdl-if.git
+

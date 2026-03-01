@@ -1,5 +1,5 @@
 // tb_reg_if.sv — User-supplied SV implementation + testbench
-// Requires: tb_pkg.sv (tb package) and tb_RegIf_dpi_pkg.sv (generated) compiled first.
+// Requires: tb_pkg.sv, tb_RegIf_dpi_pkg.sv, and tb_test_pkg.sv compiled first.
 
 // Concrete implementation — user-written
 class tb_RegIf_impl implements tb::RegIf;
@@ -16,23 +16,15 @@ class tb_RegIf_impl implements tb::RegIf;
   endtask
 endclass
 
-// Top-level testbench module
+// Top-level testbench module — no DPI import/export here; all DPI is in the packages.
 module tb_top;
   import tb_RegIf_dpi::*;
-
-  // Import: C provides, SV calls to kick off the test
-  import "DPI-C" function void ml_hpi_test_start(int root_id);
-
-  // Export: SV provides, C calls to end simulation
-  export "DPI-C" function ml_hpi_test_finish;
-  function automatic void ml_hpi_test_finish();
-    $finish;
-  endfunction
+  import tb_test::*;
 
   initial begin
     automatic tb_RegIf_impl impl = new();
     automatic int root_id = tb_RegIfRoot::register_inst(impl);
-    ml_hpi_test_start(root_id);   // hand control to C
+    ml_hpi_test_start(root_id);   // hand control to C (declared in tb_test package)
     #100000;
     $fatal(1, "timeout waiting for C test");
   end

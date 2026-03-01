@@ -84,11 +84,17 @@ class GenSV(Generator):
 
     def _write_dpi_package(self, out: StringIO, root: Interface, flat_root: str):
         all_ifaces = self._all_interfaces_for_root(root)
+        pkg_name = f"{flat_root}_dpi"
 
         blocking_methods = [(i, m) for i in all_ifaces
                             for m in i.methods if m.is_blocking()]
 
-        out.write(f"package {flat_root}_dpi;\n\n")
+        out.write(f"package {pkg_name};\n\n")
+
+        # 'context' is required so the simulator sets the DPI scope to this
+        # package before calling C, allowing svGetScope() to capture it.
+        out.write(f'  import "DPI-C" context function int {pkg_name}_init();\n')
+        out.write(f"  int __pkg_init = {pkg_name}_init();\n\n")
 
         # Root class lives inside the package so navigate() can see it
         self._write_root_class(out, root, flat_root)
@@ -104,9 +110,7 @@ class GenSV(Generator):
                           f'{flat_if}_{meth.name}_complete({", ".join(args)});\n')
             out.write("\n")
 
-        # Navigate function — returns root interface type
-        # For simple leaf roots this is a direct lookup.
-        # For composite roots we walk members depth-first.
+        # Navigate function
         self._write_navigate(out, root, flat_root)
         out.write("\n")
 
