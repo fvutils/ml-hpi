@@ -7,13 +7,16 @@
 
 SoC verification demands that the same test intent execute across radically different
 environments: block-level simulation, subsystem integration, full-chip simulation,
-emulation, and silicon bring-up — and across multiple languages: SystemVerilog,
-C++, Python, and PSS. The Multi-Language Hierarchical Programming Interface
-(ml-hpi) defines a single semantic model for verification APIs that generates
-correct, idiomatic bindings for every language automatically. This paper motivates
-the problem, identifies two verification-specific requirements that make a generic
-IDL insufficient, and shows how ml-hpi extends naturally to PSS — letting teams
-derive PSS infrastructure directly from an existing SystemVerilog interface.
+emulation, and silicon bring-up. The Multi-Language Hierarchical Programming Interface
+(ml-hpi) addresses this on two levels. First, interface abstraction decouples test
+logic from any specific testbench hierarchy, enabling the same test to run unchanged
+across all integration levels — even in a single-language environment. Second, a
+shared semantic model automates the otherwise hand-written integration infrastructure
+required when multiple languages are in play, generating correct, idiomatic bindings
+for SystemVerilog, C++, Python, and PSS simultaneously. This paper motivates the
+problem, identifies two verification-specific requirements that make a generic IDL
+insufficient, and shows how ml-hpi extends naturally to PSS — letting teams derive
+PSS infrastructure directly from an existing SystemVerilog interface.
 
 
 ## 1. The Test Reuse Problem
@@ -48,12 +51,17 @@ environment capable of providing a `DmaIf` implementation could run the sequence
 unchanged.
 
 This "program to an interface, not an implementation" principle is well-established
-in software engineering. Applying it to hardware verification introduces one
-additional complication: verification work spans multiple languages, each with its
-own mechanism for declaring interfaces. Defining `DmaIf` in SystemVerilog does not
-make it available in C++, Python, or PSS. Without a language-neutral specification,
-each new language context requires yet another hand-written interface definition and
-yet another set of glue code connecting it to the others.
+in software engineering. Applying it to hardware verification immediately delivers
+portability across abstraction levels: any environment — at block, subsystem, SoC,
+emulation, or silicon level — that provides a `DmaIf` implementation can run the
+sequence unchanged, within a single language.
+
+A further dividend appears when verification spans multiple languages: SystemVerilog,
+C++, Python, and PSS each have their own mechanism for declaring interfaces. Without
+a language-neutral specification, each new language context requires a hand-written
+interface definition and a hand-written binding layer kept in sync forever. ml-hpi
+automates this integration infrastructure from the same spec that already enables
+single-language reuse.
 
 
 ## 2. What Makes Verification Interfaces Different
@@ -146,8 +154,8 @@ for C. The interface author states *what* each method does; the generator decide
 
 ### The Fragmentation Problem
 
-Without a shared specification, the same logical operation accumulates a separate
-definition in every language context:
+Without a shared specification, each language context requires a separate,
+hand-written interface definition:
 
 | Language / context | Expression of `do_transfer` |
 |---|---|
@@ -159,7 +167,10 @@ definition in every language context:
 
 Each definition is hand-written and maintained independently. A signature change
 requires five coordinated edits; a type mismatch silently compiles in one language
-and fails at simulation time in another.
+and fails at simulation time in another. The goal of ml-hpi is not to collapse these
+into a single cross-language call site — each language retains its idiomatic form —
+but to *generate* each representation automatically from one source, so none of
+them are hand-maintained.
 
 ### One Model, Many Representations
 
@@ -223,6 +234,9 @@ tests that are now verifying end-to-end paths through the interconnect rather th
 just the DMA block in isolation.
 
 ### SoC, Emulation, and Silicon
+
+Both block and subsystem-level verification are performed in SystemVerilog with
+UVM. Going beyond means implementing our test intent in a different language.
 
 The same pattern scales further. A C++ virtual platform, a Python cocotb harness,
 and a bare-metal C driver each provide their own `DmaIf` implementation;
@@ -293,11 +307,19 @@ generic IDLs miss, and that can be expressed in or derived from whichever source
 language a team already uses.
 
 The result is a single interface definition that yields idiomatic, correct bindings
-for SystemVerilog, C++, Python, C, and PSS simultaneously. Tests written against
-that interface travel from block to subsystem to SoC without modification. The same
+for SystemVerilog, C++, Python, C, and PSS simultaneously. The value is two-part:
+interface abstraction delivers test portability across abstraction levels in a
+single-language environment; the shared semantic model then automates the
+integration infrastructure required when multiple languages meet. The same
 spec that enables UVM sequence reuse automatically generates the PSS `function
 import` infrastructure needed for portable stimulus — turning a one-time interface
 authoring investment into leverage across every level of the verification hierarchy.
+
+The consistent interface contracts that result carry an additional indirect benefit:
+when `DmaIf` carries identical semantics in every language, AI-assisted translation
+of test logic between languages becomes a structural mapping rather than a semantic
+inference problem — a consequence of the consistency ml-hpi enforces, though not a
+primary design goal.
 
 
 ## Appendix: ml-hpi at a Glance

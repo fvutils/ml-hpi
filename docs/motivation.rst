@@ -29,21 +29,31 @@ interface; the test logic is never touched.
 The Multi-Language Challenge
 -----------------------------
 
-Applying this principle to hardware verification introduces one further
-complication: verification spans multiple languages. Defining ``DmaIf`` in
-SystemVerilog does not make it available in C++, Python, or PSS. Without a
-language-neutral specification, each new language context requires a
-hand-written interface definition and a hand-written binding layer — and the
-two must be kept in sync forever.
+The interface abstraction described above already delivers portability across
+abstraction levels in a single-language environment: any SystemVerilog testbench
+that provides a ``DmaIf`` implementation can run the same sequence unchanged.
+The additional challenge appears when verification spans multiple languages.
+Defining ``DmaIf`` in SystemVerilog does not make it available in C++, Python,
+or PSS. Without a language-neutral specification, each new language context
+requires a hand-written interface definition and a hand-written binding layer —
+and the two must be kept in sync forever.
 
-ml-hpi solves this with a *semantic model*: a language-neutral description of
-interfaces, methods, types, hierarchy, and per-method attributes. The model
-can be recorded in YAML/JSON, but it can equally be *expressed* in a host
-language. A SystemVerilog ``interface class`` hierarchy is a complete, valid
-representation of the same model; an ml-hpi extraction tool derives the
-YAML/JSON form automatically. From that derived representation the toolchain
-generates idiomatic bindings for all target languages in one step — the user
-maintains one source artifact and gets everything else for free.
+ml-hpi automates this integration infrastructure with a *semantic model*: a
+language-neutral description of interfaces, methods, types, hierarchy, and
+per-method attributes. The model can be recorded in YAML/JSON, but it can
+equally be *expressed* in a host language. A SystemVerilog ``interface class``
+hierarchy is a complete, valid representation of the same model; an ml-hpi
+extraction tool derives the YAML/JSON form automatically. From that derived
+representation the toolchain generates idiomatic bindings for all target
+languages in one step — the user maintains one source artifact and gets
+everything else for free.
+
+The consistent interface contracts that result also provide a stable semantic
+anchor for AI-assisted cross-language translation: when ``DmaIf`` carries
+identical semantics in every language, translating test logic between them
+becomes a syntax mapping rather than a semantic inference problem — an indirect
+benefit that falls outside ml-hpi's direct scope but follows naturally from the
+consistency it enforces.
 
 Verification-Specific Requirements
 ------------------------------------

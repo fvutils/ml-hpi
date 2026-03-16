@@ -11,10 +11,12 @@ for SystemVerilog, C++, Python, C, and PSS simultaneously.
 
 SoC verification requires the same test intent to run across block-level
 simulation, subsystem integration, full-chip simulation, emulation, and silicon
-bring-up. Today, teams duplicate effort by rewriting tests for each environment
-and each language. ml-hpi solves this by defining a shared interface contract
-once: any environment that provides an implementation can run any test written
-against that interface, unchanged.
+bring-up. ml-hpi addresses this on two levels. First, interface abstraction
+decouples test logic from any specific testbench hierarchy so the same test runs
+unchanged from block to SoC — even in a pure-SystemVerilog environment. Second,
+a shared semantic model automates the otherwise hand-written glue needed when
+multiple languages are in play: C++, Python, and PSS bindings are generated from
+the same spec, never maintained by hand.
 
 Key features:
 - **Hierarchical context** — interfaces are typed objects with field and array
