@@ -4,10 +4,21 @@ from typing import List, Optional
 from pydantic import BaseModel
 
 
+LOG_LEVELS = {
+    "off": 0,
+    "error": 1,
+    "warning": 2,
+    "info": 3,
+    "debug": 4,
+    "trace": 5,
+}
+
+
 class MethodAttr(BaseModel):
     solve: Optional[bool] = None
     target: Optional[bool] = None
     blocking: Optional[bool] = None
+    log_level: Optional[str] = None
 
 
 class Param(BaseModel):
@@ -39,6 +50,22 @@ class Method(BaseModel):
                 return a.solve
         return False
 
+    def get_log_level(self) -> Optional[str]:
+        """Return the method-level log_level if set, else None."""
+        for a in self.attr:
+            if a.log_level is not None:
+                return a.log_level
+        return None
+
+    def effective_log_level(self, iface_log_level: Optional[str] = None) -> str:
+        """Return resolved log level: method -> interface -> 'info'."""
+        ml = self.get_log_level()
+        if ml is not None:
+            return ml
+        if iface_log_level is not None:
+            return iface_log_level
+        return "info"
+
 
 class Member(BaseModel):
     name: str
@@ -51,6 +78,7 @@ class Interface(BaseModel):
     extends: Optional[str] = None
     methods: List[Method] = []
     members: List[Member] = []
+    log_level: Optional[str] = None
 
     def pkg(self) -> str:
         """Return the package prefix (everything before the last dot)."""

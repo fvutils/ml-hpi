@@ -90,3 +90,95 @@ class Generator(ABC):
             "uintptr": "uintptr_t",
         }
         return _map.get(ml_type, ml_type)
+
+    @staticmethod
+    def cpp_type(ml_type: str, addr_bits: int = 64) -> str:
+        """Map an ml-hpi scalar type to its C++ type string.
+
+        Identical to c_type() since C++ uses the same <cstdint> types.
+        """
+        return Generator.c_type(ml_type, addr_bits)
+
+    @staticmethod
+    def python_type(ml_type: str, style: str = "plain", addr_bits: int = 64) -> str:
+        """Map an ml-hpi scalar type to its Python type string.
+
+        *style* is one of ``"plain"``, ``"annotated"``, or ``"ctypes"``.
+        """
+        if style == "ctypes":
+            _map = {
+                "void":    "None",
+                "bool":    "ctypes.c_bool",
+                "int8":    "ctypes.c_int8",
+                "uint8":   "ctypes.c_uint8",
+                "int16":   "ctypes.c_int16",
+                "uint16":  "ctypes.c_uint16",
+                "int32":   "ctypes.c_int32",
+                "uint32":  "ctypes.c_uint32",
+                "int64":   "ctypes.c_int64",
+                "uint64":  "ctypes.c_uint64",
+                "addr":    f"ctypes.c_uint{addr_bits}",
+                "addr32":  "ctypes.c_uint32",
+                "addr64":  "ctypes.c_uint64",
+                "uintptr": "ctypes.c_void_p",
+            }
+            return _map.get(ml_type, ml_type)
+
+        if style == "annotated":
+            _map = {
+                "void":    "None",
+                "bool":    "bool",
+                "int8":    "Int8",
+                "uint8":   "UInt8",
+                "int16":   "Int16",
+                "uint16":  "UInt16",
+                "int32":   "Int32",
+                "uint32":  "UInt32",
+                "int64":   "Int64",
+                "uint64":  "UInt64",
+                "addr":    "Addr",
+                "addr32":  "Addr32",
+                "addr64":  "Addr64",
+                "uintptr": "UIntPtr",
+            }
+            return _map.get(ml_type, ml_type)
+
+        # plain
+        _map = {
+            "void":    "None",
+            "bool":    "bool",
+            "int8":    "int",
+            "uint8":   "int",
+            "int16":   "int",
+            "uint16":  "int",
+            "int32":   "int",
+            "uint32":  "int",
+            "int64":   "int",
+            "uint64":  "int",
+            "addr":    "int",
+            "addr32":  "int",
+            "addr64":  "int",
+            "uintptr": "int",
+        }
+        return _map.get(ml_type, ml_type)
+
+    @staticmethod
+    def pss_type(ml_type: str, addr_bits: int = 64) -> str:
+        """Map an ml-hpi scalar type to its PSS type string."""
+        _map = {
+            "void":    "void",
+            "bool":    "bool",
+            "int8":    "int<8>",
+            "uint8":   "bit<8>",
+            "int16":   "int<16>",
+            "uint16":  "bit<16>",
+            "int32":   "int<32>",
+            "uint32":  "bit<32>",
+            "int64":   "int<64>",
+            "uint64":  "bit<64>",
+            "addr":    "addr_t",
+            "addr32":  "addr_t",
+            "addr64":  "addr_t",
+            "uintptr": "chandle",
+        }
+        return _map.get(ml_type, ml_type)

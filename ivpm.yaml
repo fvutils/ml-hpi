@@ -19,4 +19,11 @@ package:
       url: https://github.com/dv-flow/pytest-dfm.git
     - name: pyhdl-if
       url: https://github.com/fvutils/pyhdl-if.git
-
+    - name: zuspec-fe-pss
+      url: https://github.com/zuspec/zuspec-fe-pss.git
+    - name: cxxheaderparser
+      src: pypi
+    - name: myst-parser
+      src: pypi
+    - name: furo
+      src: pypi

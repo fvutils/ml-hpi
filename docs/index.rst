@@ -15,3 +15,4 @@ SystemVerilog, C++, Python, C, and PSS simultaneously.
    spec
    language_bindings
    papers/index
+   cli

@@ -19,3 +19,4 @@ conventions for each target.
    bindings/python
    bindings/c
    bindings/pss
+   bindings/logging

@@ -1,0 +1,46 @@
+ml-hpi:
+  interfaces:
+  - name: pkg.RegIf
+    methods:
+    - name: write32
+      rtype: void
+      params:
+      - name: addr
+        type: addr64
+      - name: data
+        type: uint32
+      attr:
+      - target: true
+      - blocking: true
+    - name: read32
+      rtype: uint32
+      params:
+      - name: addr
+        type: addr64
+      attr:
+      - target: true
+      - blocking: true
+    - name: reset
+      rtype: void
+      attr:
+      - target: true
+      - blocking: false
+  - name: pkg.BusIf
+    members:
+    - name: regs
+      kind: field
+      type: pkg.RegIf
+    - name: ports
+      kind: array
+      type: pkg.RegIf
+  - name: pkg.ExtRegIf
+    extends: pkg.RegIf
+    methods:
+    - name: configure
+      rtype: void
+      params:
+      - name: mode
+        type: uint32
+      attr:
+      - target: true
+      - blocking: false
