@@ -49,19 +49,34 @@ jobs:
       - name: Build HTML docs
         run: sphinx-build -b html docs docs/_build/html
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs/_build/html
+      # The GitHub Pages deploy step WAS HERE and is deliberately gone (2026-08-31).
+      #
+      # It had no condition beyond the default branch, and since fvutils joined the
+      # Forgejo <-> GitHub mirror that branch is moved by a five-minute cron. A mirror
+      # operation must never be a publishing operation.
+      #
+      # DELETED rather than gated because dvkit.org owns all documentation: these docs
+      # publish to dvkit.org/fvutils/<repo>/ from .forgejo/workflows/, which uploads
+      # them as an artifact for the host-side poller. A tag-gated Pages deploy would
+      # still be a second publisher of the same content on a different schedule, and
+      # two publishers that agree today diverge the first time one fails quietly.
+      #
+      # THE DOCS BUILD ABOVE STAYS, as a CI check. A broken cross-reference should fail
+      # here, not render as a dead link on dvkit.org.
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+
+  # The GitHub Pages deploy step WAS HERE and is deliberately gone (2026-08-31).
+  #
+  # It had no condition beyond the default branch, and since fvutils joined the
+  # Forgejo <-> GitHub mirror that branch is moved by a five-minute cron. A mirror
+  # operation must never be a publishing operation.
+  #
+  # DELETED rather than gated because dvkit.org owns all documentation: these docs
+  # publish to dvkit.org/fvutils/<repo>/ from .forgejo/workflows/, which uploads
+  # them as an artifact for the host-side poller. A tag-gated Pages deploy would
+  # still be a second publisher of the same content on a different schedule, and
+  # two publishers that agree today diverge the first time one fails quietly.
+  #
+  # THE DOCS BUILD ABOVE STAYS, as a CI check. A broken cross-reference should fail
+  # here, not render as a dead link on dvkit.org.
+
